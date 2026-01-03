@@ -28,3 +28,41 @@ void displayBoard() {
 void switchPlayer() {
     currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
 }
+// Make a move
+bool makeMove(int choice) {
+    int row = (choice - 1) / 3;
+    int col = (choice - 1) % 3;
+
+    if (board[row][col] != 'X' && board[row][col] != 'O') {
+        board[row][col] = currentPlayer;
+        return true;
+    }
+    return false;
+}
+
+// Check win
+bool checkWin() {
+    for (int i = 0; i < 3; i++) {
+        if (board[i][0] == currentPlayer &&
+            board[i][1] == currentPlayer &&
+            board[i][2] == currentPlayer)
+            return true;
+
+        if (board[0][i] == currentPlayer &&
+            board[1][i] == currentPlayer &&
+            board[2][i] == currentPlayer)
+            return true;
+    }
+
+    if (board[0][0] == currentPlayer &&
+        board[1][1] == currentPlayer &&
+        board[2][2] == currentPlayer)
+        return true;
+
+    if (board[0][2] == currentPlayer &&
+        board[1][1] == currentPlayer &&
+        board[2][0] == currentPlayer)
+        return true;
+
+    return false;
+}
